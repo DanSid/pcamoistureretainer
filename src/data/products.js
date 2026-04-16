@@ -24,15 +24,14 @@ export const products = [
     accent: '#8C6BFF',
     accentSoft: '#EEE8FF',
     accentDeep: '#261E56',
-    heroImage: '/assets/redesign/Rectangle 3.png',
+    heroImage: '/assets/redesign/PCA Motion 2.mp4',
     gallery: [
       '/assets/redesign/hair-quencher-main.png',
-      '/assets/redesign/hair-quencher-alt.png',
       '/assets/redesign/Rectangle 3.png',
     ],
     detailImage: '/assets/Dudleys PCA.png',
     detailImage2: '/assets/Dudleys PCA NEW.png',
-    video: '/assets/redesign/PCA Motion 2.mp4',
+    // video: '/assets/redesign/PCA Motion 2.mp4',
     badge: 'Daily hydration',
     notes: ['Weightless feel', 'Polished finish', 'Made for daily styling'],
     highlights: [

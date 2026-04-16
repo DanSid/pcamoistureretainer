@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight, Check, PlayCircle } from 'lucide-react'
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
@@ -47,6 +48,54 @@ function RelatedProducts({ currentSlug }) {
   )
 }
 
+// Modal component for displaying enlarged images
+const ImageModal = ({ imageUrl, altText, onClose, onNext, onPrev }) => {
+  return (
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md"
+      onClick={onClose}
+    >
+      <button 
+        className="absolute top-4 right-4 text-white text-2xl z-10 hover:text-gray-300"
+        onClick={onClose}
+      >
+        &times;
+      </button>
+      
+      <button 
+        className="absolute left-4 text-white text-3xl z-10 hover:text-gray-300"
+        onClick={(e) => {
+          e.stopPropagation();
+          onPrev();
+        }}
+      >
+        &#8249;
+      </button>
+      
+      <button 
+        className="absolute right-4 text-white text-3xl z-10 hover:text-gray-300"
+        onClick={(e) => {
+          e.stopPropagation();
+          onNext();
+        }}
+      >
+        &#8250;
+      </button>
+      
+      <div 
+        className="max-w-6xl max-h-[90vh] flex items-center justify-center p-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img 
+          src={imageUrl} 
+          alt={altText} 
+          className="max-h-[85vh] max-w-full object-contain rounded-lg"
+        />
+      </div>
+    </div>
+  );
+};
+
 export default function ProductPage({ product }) {
   const heroRef = useRef(null)
   const { scrollYProgress } = useScroll({
@@ -59,6 +108,30 @@ export default function ProductPage({ product }) {
   const heroImageY = useTransform(smoothProgress, [0, 1], [0, -86])
   const heroImageRotate = useTransform(smoothProgress, [0, 1], [0, 4])
   const heroAccentY = useTransform(smoothProgress, [0, 1], [0, -40])
+  
+  // State for modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Function to handle image click
+  const openImageModal = (index) => {
+    setCurrentImageIndex(index);
+    setModalOpen(true);
+  };
+  
+  // Function to navigate to next image
+  const goToNextImage = () => {
+    setCurrentImageIndex(prevIndex => 
+      prevIndex === product.gallery.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+  
+  // Function to navigate to previous image
+  const goToPreviousImage = () => {
+    setCurrentImageIndex(prevIndex => 
+      prevIndex === 0 ? product.gallery.length - 1 : prevIndex - 1
+    );
+  };
 
   return (
     <main className="relative overflow-hidden bg-[#080507] text-white">
@@ -140,33 +213,45 @@ export default function ProductPage({ product }) {
               </Reveal>
             </motion.div>
 
-            <motion.div style={{ y: heroImageY, rotate: heroImageRotate }}>
-              <Reveal direction="right">
-                <div className="dudley-card relative overflow-hidden">
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: `radial-gradient(circle at top right, ${product.accent}55, transparent 40%)`,
-                  }}
-                />
-                <img
-                  src={product.heroImage}
-                  alt={product.name}
-                  className="relative z-10 h-full min-h-[460px] w-full object-contain p-8 lg:p-10"
-                />
-                <div className="absolute left-5 top-5 rounded-full border border-white/10 bg-black/[0.35] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.32em] text-white/[0.72]">
-                  {product.badge}
-                </div>
-                <motion.div
-                  style={{ y: useTransform(smoothProgress, [0, 1], [0, -34]) }}
-                  className="absolute bottom-6 right-6 rounded-[1.5rem] border border-white/10 bg-black/30 px-5 py-4 backdrop-blur-xl"
-                >
-                  <p className="text-[11px] uppercase tracking-[0.28em] text-[#efc868]">Parallax detail</p>
-                  <p className="mt-2 font-display text-2xl text-[#f6e9e9]">{product.callout}</p>
-                </motion.div>
-              </div>
-              </Reveal>
-            </motion.div>
+      <motion.div style={{ y: heroImageY, rotate: heroImageRotate }}>
+        <Reveal direction="right">
+          <div className="dudley-card relative overflow-hidden">
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `radial-gradient(circle at top right, ${product.accent}55, transparent 40%)`,
+              }}
+            />
+            <div className="absolute left-5 top-5 rounded-full border border-white/10 bg-black/[0.35] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.32em] text-white/[0.72]">
+              {product.badge}
+            </div>
+            {product.heroImage?.endsWith('.mp4') ? (
+              <video
+                src={product.heroImage}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="relative z-10 h-full min-h-[560px] w-full object-contain p-8 pt-16 pb-24 lg:p-10 lg:pt-20 lg:pb-32"
+              />
+            ) : (
+              <img
+                src={product.heroImage}
+                alt={product.name}
+                className="relative z-10 h-full min-h-[560px] w-full object-contain p-8 pt-16 pb-24 lg:p-10 lg:pt-20 lg:pb-32"
+              />
+            )}
+          </div>
+          <motion.div
+            style={{ y: useTransform(smoothProgress, [0, 1], [0, -34]) }}
+            className="relative mt-4 rounded-[1.5rem] border border-white/10 bg-black/30 px-5 py-4 backdrop-blur-xl"
+          >
+            <p className="text-[11px] uppercase tracking-[0.28em] text-[#efc868]">Parallax detail</p>
+            <p className="mt-2 font-display text-2xl text-[#f6e9e9]">{product.callout}</p>
+          </motion.div>
+        </Reveal>
+      </motion.div>
+
           </div>
         </div>
       </section>
@@ -198,80 +283,101 @@ export default function ProductPage({ product }) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-4 sm:px-8 lg:px-10">
-        <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <Reveal direction="left">
-            <div className="dudley-card overflow-hidden">
-              <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
-                <div>
-                  <p className="section-label">Gallery</p>
-                  <h2 className="mt-3 font-display text-4xl text-[#f3e4e4]">Updated product imagery</h2>
-                </div>
-              </div>
-              <div className="grid gap-4 p-4 sm:grid-cols-2">
-                {product.gallery.map((image, index) => (
-                  <Reveal key={`${image}-${index}`} direction={index % 2 === 0 ? 'up' : 'right'} delay={index * 0.08}>
-                    <div className="dudley-media-panel h-[260px]">
-                      <img src={image} alt={`${product.name} view ${index + 1}`} className="h-full w-full object-contain p-4" />
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-
-          <div className="grid gap-6">
-            {(product.detailImage || product.detailImage2) && (
-              <Reveal direction="right">
-                <div className="dudley-card overflow-hidden p-4">
-                  <div className="grid gap-4">
-                    {product.detailImage && (
-                      <Reveal direction="up">
-                        <div className="dudley-media-panel h-[260px]">
-                          <img src={product.detailImage} alt={`${product.name} detail`} className="h-full w-full object-contain p-4" />
-                        </div>
-                      </Reveal>
-                    )}
-                    {product.detailImage2 && (
-                      <Reveal direction="up" delay={0.08}>
-                        <div className="dudley-media-panel h-[260px]">
-                          <img src={product.detailImage2} alt={`${product.name} alternate detail`} className="h-full w-full object-contain p-4" />
-                        </div>
-                      </Reveal>
-                    )}
-                  </div>
-                </div>
-              </Reveal>
-            )}
-
-            {(product.video || product.detailVideo) && (
-              <Reveal direction="up" delay={0.12}>
-                <div className="dudley-card p-8">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/[0.06]">
-                      <PlayCircle className="h-6 w-6 text-[#efc868]" />
-                    </div>
-                    <div>
-                      <p className="section-label">Motion moment</p>
-                      <h3 className="mt-2 font-display text-3xl text-[#f3e5e5]">Editorial movement built in</h3>
-                    </div>
-                  </div>
-                  <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/20">
-                    <video
-                      src={product.video || product.detailVideo}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="h-full max-h-[320px] w-full object-cover"
-                    />
-                  </div>
-                </div>
-              </Reveal>
-            )}
+  <section className="mx-auto max-w-7xl px-6 py-4 sm:px-8 lg:px-10">
+  <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+    <Reveal direction="left">
+      <div className="dudley-card overflow-hidden">
+        <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
+          <div>
+            <p className="section-label">Gallery</p>
+            <h2 className="mt-3 font-display text-4xl text-[#f3e4e4]">Updated product imagery</h2>
           </div>
         </div>
-      </section>
+        <div className="grid gap-6 p-6 sm:grid-cols-2">
+          {product.gallery.map((image, index) => (
+            <Reveal key={`${image}-${index}`} direction={index % 2 === 0 ? 'up' : 'right'} delay={index * 0.08}>
+              <div 
+                className="dudley-media-panel h-[360px] sm:h-[400px] lg:h-[440px] cursor-pointer"
+                onClick={() => openImageModal(index)}
+              >
+                <img 
+                  src={image} 
+                  alt={`${product.name} view ${index + 1}`} 
+                  className="h-full w-full object-contain p-6" 
+                />
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </Reveal>
+
+    <div className="grid gap-6">
+      {(product.detailImage || product.detailImage2) && (
+        <Reveal direction="right">
+          <div className="dudley-card overflow-hidden p-4">
+            <div className="grid gap-6">
+              {product.detailImage && (
+                <Reveal direction="up">
+                  <div 
+                    className="dudley-media-panel h-[360px] sm:h-[400px] lg:h-[440px] cursor-pointer"
+                    onClick={() => openImageModal(product.gallery.length)} // Index for first detail image
+                  >
+                    <img 
+                      src={product.detailImage} 
+                      alt={`${product.name} detail`} 
+                      className="h-full w-full object-contain p-6" 
+                    />
+                  </div>
+                </Reveal>
+              )}
+              {product.detailImage2 && (
+                <Reveal direction="up" delay={0.08}>
+                  <div 
+                    className="dudley-media-panel h-[360px] sm:h-[400px] lg:h-[440px] cursor-pointer"
+                    onClick={() => openImageModal(product.gallery.length + 1)} // Index for second detail image
+                  >
+                    <img 
+                      src={product.detailImage2} 
+                      alt={`${product.name} alternate detail`} 
+                      className="h-full w-full object-contain p-6" 
+                    />
+                  </div>
+                </Reveal>
+              )}
+            </div>
+          </div>
+        </Reveal>
+      )}
+
+      {(product.video || product.detailVideo) && (
+        <Reveal direction="up" delay={0.12}>
+          <div className="dudley-card p-8">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/[0.06]">
+                <PlayCircle className="h-6 w-6 text-[#efc868]" />
+              </div>
+              <div>
+                <p className="section-label">Motion moment</p>
+                <h3 className="mt-2 font-display text-3xl text-[#f3e5e5]">Editorial movement built in</h3>
+              </div>
+            </div>
+            <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/20">
+              <video
+                src={product.video || product.detailVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="h-full max-h-[320px] w-full object-cover"
+              />
+            </div>
+          </div>
+        </Reveal>
+      )}
+    </div>
+  </div>
+</section>
 
       {product.extraImages && product.extraImages.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-10">
@@ -282,8 +388,15 @@ export default function ProductPage({ product }) {
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {product.extraImages.map((image, index) => (
               <Reveal key={`${image}-${index}`} direction={index % 2 === 0 ? 'left' : 'right'} delay={index * 0.08}>
-                <div className="dudley-card dudley-media-panel h-[360px] overflow-hidden">
-                  <img src={image} alt={`${product.name} extra ${index + 1}`} className="h-full w-full object-contain p-4" />
+                <div 
+                  className="dudley-card dudley-media-panel h-[360px] overflow-hidden cursor-pointer"
+                  onClick={() => openImageModal(product.gallery.length + (product.detailImage ? 1 : 0) + (product.detailImage2 ? 1 : 0) + index)} // Calculate correct index
+                >
+                  <img 
+                    src={image} 
+                    alt={`${product.name} extra ${index + 1}`} 
+                    className="h-full w-full object-contain p-4" 
+                  />
                 </div>
               </Reveal>
             ))}
@@ -315,6 +428,25 @@ export default function ProductPage({ product }) {
       </section>
 
       <RelatedProducts currentSlug={product.slug} />
+      
+      {/* Image Modal */}
+      {modalOpen && (
+        <ImageModal 
+          imageUrl={
+            currentImageIndex < product.gallery.length 
+              ? product.gallery[currentImageIndex] 
+              : currentImageIndex < product.gallery.length + (product.detailImage ? 1 : 0) 
+                ? product.detailImage 
+                : currentImageIndex < product.gallery.length + (product.detailImage ? 1 : 0) + (product.detailImage2 ? 1 : 0) 
+                  ? product.detailImage2 
+                  : product.extraImages[currentImageIndex - product.gallery.length - (product.detailImage ? 1 : 0) - (product.detailImage2 ? 1 : 0)]
+          }
+          altText={`Enlarged view of product`}
+          onClose={() => setModalOpen(false)}
+          onNext={goToNextImage}
+          onPrev={goToPreviousImage}
+        />
+      )}
     </main>
   )
 }
