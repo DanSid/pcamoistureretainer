@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useRef } from 'react'
 import { products } from '../../data/products'
 import { AmazonRatingBadge, CouponStrip, PromoBanner } from './PromoElements'
-import { AmbientParticles } from './AmbientParticles'
+import { QuantumNodes } from './QuantumNodes'
 import { Reveal } from './Reveal'
 
 function RelatedProducts({ currentSlug }) {
@@ -134,26 +134,27 @@ export default function ProductPage({ product }) {
   };
 
   return (
-    <main className="relative overflow-hidden bg-[#080507] text-white">
+    <main className="relative overflow-hidden bg-transparent">
       <motion.div style={{ y: heroParticlesY }} className="absolute inset-0">
-        <AmbientParticles />
+        <QuantumNodes />
       </motion.div>
 
       <section ref={heroRef} className="relative overflow-hidden border-b border-white/10">
         <div
           className="absolute inset-0 opacity-80"
           style={{
-            background: `radial-gradient(circle at top, ${product.accent}33, transparent 28%), linear-gradient(180deg, rgba(7,4,6,0.88), rgba(7,4,6,0.98))`,
+            background:
+              'radial-gradient(circle at top, rgba(225, 237, 255, 0.76), transparent 30%), linear-gradient(180deg, rgba(164, 189, 221, 0.94), rgba(130, 160, 201, 0.98))',
           }}
         />
         <div className="dudley-grid absolute inset-0 opacity-[0.16]" />
         <motion.div
           style={{ y: heroAccentY }}
-          className="pointer-events-none absolute -right-10 top-24 hidden h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(239,200,104,0.18),transparent_68%)] blur-3xl lg:block"
+          className="pointer-events-none absolute -right-10 top-24 hidden h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(236,244,255,0.46),transparent_68%)] blur-3xl lg:block"
         />
         <motion.div
           style={{ y: useTransform(smoothProgress, [0, 1], [0, 55]) }}
-          className="pointer-events-none absolute left-0 top-32 hidden h-80 w-80 rounded-full bg-[radial-gradient(circle,rgba(213,156,161,0.16),transparent_70%)] blur-3xl lg:block"
+          className="pointer-events-none absolute left-0 top-32 hidden h-80 w-80 rounded-full bg-[radial-gradient(circle,rgba(196,219,247,0.34),transparent_70%)] blur-3xl lg:block"
         />
 
         <div className="relative mx-auto max-w-7xl px-6 pb-20 pt-10 sm:px-8 lg:px-10 lg:pb-28">
@@ -215,7 +216,7 @@ export default function ProductPage({ product }) {
 
       <motion.div style={{ y: heroImageY, rotate: heroImageRotate }}>
         <Reveal direction="right">
-          <div className="dudley-card relative overflow-hidden">
+          <div className="hero-media-card relative overflow-hidden">
             <div
               className="absolute inset-0"
               style={{

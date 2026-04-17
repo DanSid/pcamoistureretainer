@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useRef } from 'react'
 import { products } from '../../data/products'
 import { AmazonRatingBadge, CouponStrip, PromoBanner } from './PromoElements'
-import { AmbientParticles } from './AmbientParticles'
+import { QuantumNodes } from './QuantumNodes'
 import { Reveal } from './Reveal'
 
 const shopUrl = 'https://shop.dudleyq.com'
@@ -78,13 +78,13 @@ export default function HomePage() {
   const heroGlowOpacity = useTransform(smoothProgress, [0, 0.7], [0.95, 0.35])
 
   return (
-    <main className="relative overflow-hidden bg-[#080507] text-white">
+    <main className="relative overflow-hidden bg-transparent text-white">
       <motion.div style={{ y: heroParticlesY, opacity: heroGlowOpacity }} className="absolute inset-0">
-        <AmbientParticles />
+        <QuantumNodes />
       </motion.div>
 
       <section ref={heroRef} className="relative overflow-hidden border-b border-white/10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(211,141,146,0.18),transparent_32%),linear-gradient(180deg,rgba(7,4,6,0.88),rgba(7,4,6,0.98))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(222,235,255,0.68),transparent_30%),linear-gradient(180deg,rgba(167,191,222,0.92),rgba(130,160,201,0.98))]" />
         <div className="dudley-grid absolute inset-0 opacity-[0.18]" />
         <motion.div
           style={{ y: heroCardsY, rotate: heroCardsRotate }}
@@ -241,8 +241,8 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="max-w-xl text-base leading-7 text-white/[0.62]">
-              Every product page now shares the same visual language: cinematic dark gradients,
-              ambient particles, layered cards, and stronger product framing.
+              Every product page now shares the same visual language: airy blue gradients,
+              animated node motion, layered cards, and stronger product framing.
             </p>
           </div>
         </Reveal>
