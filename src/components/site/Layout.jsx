@@ -65,7 +65,13 @@ export function Navbar() {
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-[linear-gradient(180deg,#2f74d9_0%,#235cb4_44%,#173f80_100%)]">
+    <footer
+      className="border-t border-white/10"
+      style={{
+        background:
+          'linear-gradient(180deg, var(--theme-footer-start) 0%, var(--theme-footer-mid) 44%, var(--theme-footer-end) 100%)',
+      }}
+    >
       <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-10 lg:py-24">
         <div className="grid gap-16 lg:grid-cols-[1.2fr_0.8fr]">
           <div>

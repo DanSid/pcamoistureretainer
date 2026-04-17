@@ -144,17 +144,23 @@ export default function ProductPage({ product }) {
           className="absolute inset-0 opacity-80"
           style={{
             background:
-              'radial-gradient(circle at top, rgba(225, 237, 255, 0.76), transparent 30%), linear-gradient(180deg, rgba(164, 189, 221, 0.94), rgba(130, 160, 201, 0.98))',
+              'radial-gradient(circle at top, var(--theme-hero-glow), transparent 30%), linear-gradient(180deg, var(--theme-hero-top), var(--theme-hero-bottom))',
           }}
         />
         <div className="dudley-grid absolute inset-0 opacity-[0.16]" />
         <motion.div
-          style={{ y: heroAccentY }}
-          className="pointer-events-none absolute -right-10 top-24 hidden h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(236,244,255,0.46),transparent_68%)] blur-3xl lg:block"
+          style={{
+            y: heroAccentY,
+            background: 'radial-gradient(circle, var(--theme-hero-accent-a), transparent 68%)',
+          }}
+          className="pointer-events-none absolute -right-10 top-24 hidden h-72 w-72 rounded-full blur-3xl lg:block"
         />
         <motion.div
-          style={{ y: useTransform(smoothProgress, [0, 1], [0, 55]) }}
-          className="pointer-events-none absolute left-0 top-32 hidden h-80 w-80 rounded-full bg-[radial-gradient(circle,rgba(196,219,247,0.34),transparent_70%)] blur-3xl lg:block"
+          style={{
+            y: useTransform(smoothProgress, [0, 1], [0, 55]),
+            background: 'radial-gradient(circle, var(--theme-hero-accent-b), transparent 70%)',
+          }}
+          className="pointer-events-none absolute left-0 top-32 hidden h-80 w-80 rounded-full blur-3xl lg:block"
         />
 
         <div className="relative mx-auto max-w-7xl px-6 pb-20 pt-10 sm:px-8 lg:px-10 lg:pb-28">

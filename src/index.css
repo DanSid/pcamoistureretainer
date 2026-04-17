@@ -7,6 +7,30 @@
 @layer base {
   :root {
     color-scheme: dark;
+    --theme-body-start: #d8cff8;
+    --theme-body-mid: #b6a1ea;
+    --theme-body-end: #9074d7;
+    --theme-panel-start: rgba(133, 112, 207, 0.9);
+    --theme-panel-end: rgba(98, 76, 171, 0.94);
+    --theme-panel-soft: rgba(84, 63, 145, 0.3);
+    --theme-hover-border: rgba(236, 229, 255, 0.34);
+    --theme-hover-ring: rgba(236, 229, 255, 0.12);
+    --theme-footer-start: #cbbcf5;
+    --theme-footer-mid: #9a81de;
+    --theme-footer-end: #6e56ba;
+    --theme-hero-glow: rgba(239, 234, 255, 0.74);
+    --theme-hero-top: rgba(198, 183, 243, 0.94);
+    --theme-hero-bottom: rgba(182, 161, 234, 0.98);
+    --theme-hero-accent-a: rgba(234, 227, 255, 0.48);
+    --theme-hero-accent-b: rgba(205, 191, 248, 0.34);
+    --theme-top-card: linear-gradient(180deg, rgba(145, 121, 214, 0.78), rgba(98, 76, 171, 0.88));
+    --theme-modal-start: #4e367f;
+    --theme-modal-end: #2b1b4c;
+    --theme-modal-chip-border: rgba(227, 215, 255, 0.26);
+    --theme-modal-chip-bg: rgba(227, 215, 255, 0.12);
+    --theme-modal-chip-text: #f2e8ff;
+    --theme-modal-glow-a: rgba(214, 197, 255, 0.36);
+    --theme-modal-glow-b: rgba(184, 162, 239, 0.24);
   }
 
   html {
@@ -16,10 +40,10 @@
   }
 
   body {
-    @apply m-0 bg-[#82a0c9] font-body text-white;
+    @apply m-0 font-body text-white;
     background-image:
-      radial-gradient(circle at top, rgba(226, 238, 255, 0.76), transparent 28%),
-      linear-gradient(180deg, #b6cae4 0%, #82a0c9 46%, #6f90bd 100%);
+      radial-gradient(circle at top, var(--theme-hero-glow), transparent 28%),
+      linear-gradient(180deg, var(--theme-body-start) 0%, var(--theme-body-mid) 46%, var(--theme-body-end) 100%);
     background-attachment: fixed;
   }
 
@@ -34,7 +58,8 @@
 
 @layer components {
   .luxury-shell {
-    @apply min-h-screen bg-[#82a0c9] text-white;
+    @apply min-h-screen text-white;
+    background: linear-gradient(180deg, var(--theme-body-start) 0%, var(--theme-body-mid) 46%, var(--theme-body-end) 100%);
   }
 
   .font-display {
@@ -115,9 +140,9 @@
   .editorial-panel,
   .dudley-card {
     @apply rounded-[2rem] border border-white/10 backdrop-blur-xl;
-    background: linear-gradient(180deg, rgba(31, 84, 169, 0.86), rgba(20, 59, 123, 0.9));
+    background: linear-gradient(180deg, var(--theme-panel-start), var(--theme-panel-end));
     box-shadow:
-      0 18px 60px rgba(10, 29, 69, 0.28),
+      0 18px 60px rgba(55, 35, 110, 0.28),
       inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
 
@@ -135,15 +160,16 @@
 
   .dudley-card-hover:hover {
     transform: translateY(-8px);
-    border-color: rgba(225, 237, 255, 0.28);
+    border-color: var(--theme-hover-border);
     box-shadow:
-      0 26px 80px rgba(10, 29, 69, 0.36),
-      0 0 0 1px rgba(225, 237, 255, 0.08),
+      0 26px 80px rgba(55, 35, 110, 0.36),
+      0 0 0 1px var(--theme-hover-ring),
       inset 0 1px 0 rgba(255, 255, 255, 0.09);
   }
 
   .dudley-media-panel {
-    @apply overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#120d10];
+    @apply overflow-hidden rounded-[1.6rem] border border-white/10;
+    background: linear-gradient(180deg, rgba(155, 133, 224, 0.42), var(--theme-panel-soft));
   }
 
   .footer-link {

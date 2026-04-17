@@ -12,11 +12,14 @@ const shopUrl = 'https://shop.dudleyq.com'
 function FeatureCard({ product, index }) {
   return (
     <Link to={product.route} className="dudley-card dudley-card-hover group flex h-full flex-col overflow-hidden">
-      <div className="relative overflow-hidden border-b border-white/10 bg-[#130d11]">
+      <div
+        className="relative overflow-hidden border-b border-white/10"
+        style={{ background: 'var(--theme-top-card)' }}
+      >
         <div
           className="absolute inset-0 opacity-70 transition duration-500 group-hover:scale-110"
           style={{
-            background: `radial-gradient(circle at top right, ${product.accent}50, transparent 45%), linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.5))`,
+            background: `radial-gradient(circle at top right, ${product.accent}50, transparent 45%), var(--theme-top-card)`,
           }}
         />
         <img
@@ -84,7 +87,13 @@ export default function HomePage() {
       </motion.div>
 
       <section ref={heroRef} className="relative overflow-hidden border-b border-white/10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(222,235,255,0.68),transparent_30%),linear-gradient(180deg,rgba(167,191,222,0.92),rgba(130,160,201,0.98))]" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(circle at top, var(--theme-hero-glow), transparent 30%), linear-gradient(180deg, var(--theme-hero-top), var(--theme-hero-bottom))',
+          }}
+        />
         <div className="dudley-grid absolute inset-0 opacity-[0.18]" />
         <motion.div
           style={{ y: heroCardsY, rotate: heroCardsRotate }}
