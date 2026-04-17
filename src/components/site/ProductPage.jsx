@@ -13,37 +13,7 @@ function RelatedProducts({ currentSlug }) {
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-10">
-        {/* <div className="mb-8 flex items-end justify-between gap-6">
-        <div>
-          <p className="section-label">More signature pages</p>
-          <h2 className="mt-4 font-display text-5xl leading-none text-[#f2dfdf]">
-            Continue through the collection.
-          </h2>
-        </div>
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.22em] text-white/[0.68] transition hover:text-white"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to home
-        </Link>
-      </div> */}
-
-      {/* <div className="grid gap-5 md:grid-cols-3">
-        {related.map((product, index) => (
-          <Reveal key={product.slug} direction={index % 2 === 0 ? 'left' : 'right'} delay={index * 0.08}>
-            <Link to={product.route} className="dudley-card dudley-card-hover block p-6">
-              <p className="text-[11px] uppercase tracking-[0.28em] text-[#d59ca1]">{product.eyebrow}</p>
-              <h3 className="mt-3 font-display text-3xl text-[#f4e9e9]">{product.shortName}</h3>
-              <p className="mt-3 text-sm leading-6 text-white/[0.62]">{product.tagline}</p>
-              <span className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.26em] text-[#efc868]">
-                View page
-                <ArrowRight className="h-4 w-4" />
-              </span>
-            </Link>
-          </Reveal>
-        ))}
-      </div> */}
+      
     </section>
   )
 }
@@ -169,7 +139,7 @@ export default function ProductPage({ product }) {
               <Reveal direction="left">
                 <div>
               <p className="hero-pill w-fit">{product.eyebrow}</p>
-              <h1 className="mt-8 font-display text-[3.8rem] leading-[0.9] tracking-[-0.04em] text-[#f0d4d6] sm:text-[5.2rem] lg:text-[6.8rem]">
+              <h1 className="mt-8 font-display text-[3.8rem] leading-[0.9] tracking-[-0.04em] text-[#000000] sm:text-[5.2rem] lg:text-[6.8rem]">
                 {product.name}
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/[0.66]">{product.description}</p>
@@ -374,24 +344,7 @@ export default function ProductPage({ product }) {
 
       <RelatedProducts currentSlug={product.slug} />
       
-      {/* Image Modal */}
-      {modalOpen && (
-        <ImageModal 
-          imageUrl={
-            currentImageIndex < product.gallery.length 
-              ? product.gallery[currentImageIndex] 
-              : currentImageIndex < product.gallery.length + (product.detailImage ? 1 : 0) 
-                ? product.detailImage 
-                : currentImageIndex < product.gallery.length + (product.detailImage ? 1 : 0) + (product.detailImage2 ? 1 : 0) 
-                  ? product.detailImage2 
-                  : product.extraImages[currentImageIndex - product.gallery.length - (product.detailImage ? 1 : 0) - (product.detailImage2 ? 1 : 0)]
-          }
-          altText={`Enlarged view of product`}
-          onClose={() => setModalOpen(false)}
-          onNext={goToNextImage}
-          onPrev={goToPreviousImage}
-        />
-      )}
+   
     </main>
   )
 }

@@ -72,61 +72,61 @@ export function CouponPopup() {
 
   if (!isOpen) return null
 
-  return (
-    <div className="fixed inset-0 z-[80] flex items-end justify-center bg-black/[0.65] p-4 backdrop-blur-sm md:items-center">
-      <div
-        className="relative w-full max-w-xl overflow-hidden rounded-[32px] border border-white/10 p-6 text-white shadow-[0_24px_80px_rgba(55,35,110,0.45)] md:p-8"
-        style={{ background: 'linear-gradient(180deg, var(--theme-modal-start), var(--theme-modal-end))' }}
-      >
-        <button
-          type="button"
-          aria-label="Close coupon popup"
-          onClick={() => setIsOpen(false)}
-          className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-white/10 hover:text-white"
-        >
-          <X size={18} />
-        </button>
+  // return (
+  //   <div className="fixed inset-0 z-[80] flex items-end justify-center bg-black/[0.65] p-4 backdrop-blur-sm md:items-center">
+  //     <div
+  //       className="relative w-full max-w-xl overflow-hidden rounded-[32px] border border-white/10 p-6 text-white shadow-[0_24px_80px_rgba(55,35,110,0.45)] md:p-8"
+  //       style={{ background: 'linear-gradient(180deg, var(--theme-modal-start), var(--theme-modal-end))' }}
+  //     >
+  //       <button
+  //         type="button"
+  //         aria-label="Close coupon popup"
+  //         onClick={() => setIsOpen(false)}
+  //         className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-white/10 hover:text-white"
+  //       >
+  //         <X size={18} />
+  //       </button>
 
-        <div
-          className="absolute -left-10 top-0 h-40 w-40 rounded-full blur-3xl"
-          style={{ background: 'var(--theme-modal-glow-a)' }}
-        />
-        <div
-          className="absolute -right-4 bottom-0 h-40 w-40 rounded-full blur-3xl"
-          style={{ background: 'var(--theme-modal-glow-b)' }}
-        />
+  //       <div
+  //         className="absolute -left-10 top-0 h-40 w-40 rounded-full blur-3xl"
+  //         style={{ background: 'var(--theme-modal-glow-a)' }}
+  //       />
+  //       <div
+  //         className="absolute -right-4 bottom-0 h-40 w-40 rounded-full blur-3xl"
+  //         style={{ background: 'var(--theme-modal-glow-b)' }}
+  //       />
 
-        <div className="relative">
-          <div
-            className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em]"
-            style={{
-              borderColor: 'var(--theme-modal-chip-border)',
-              background: 'var(--theme-modal-chip-bg)',
-              color: 'var(--theme-modal-chip-text)',
-            }}
-          >
-            <Gift size={14} /> Limited offer
-          </div>
-          <h3 className="mt-5 max-w-lg font-display text-5xl leading-tight text-[#f7e8e8]">{couponOffer.code}</h3>
-          <p className="mt-3 max-w-lg text-base leading-7 text-white/70 md:text-lg">
-            Get {couponOffer.text}. Use the code on the Dudley shop and continue browsing the
-            refreshed collection experience.
-          </p>
+  //       <div className="relative">
+  //         <div
+  //           className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em]"
+  //           style={{
+  //             borderColor: 'var(--theme-modal-chip-border)',
+  //             background: 'var(--theme-modal-chip-bg)',
+  //             color: 'var(--theme-modal-chip-text)',
+  //           }}
+  //         >
+  //           <Gift size={14} /> Limited offer
+  //         </div>
+  //         <h3 className="mt-5 max-w-lg font-display text-5xl leading-tight text-[#f7e8e8]">{couponOffer.code}</h3>
+  //         <p className="mt-3 max-w-lg text-base leading-7 text-white/70 md:text-lg">
+  //           Get {couponOffer.text}. Use the code on the Dudley shop and continue browsing the
+  //           refreshed collection experience.
+  //         </p>
 
-          <div className="mt-6">
-            <AmazonRatingBadge dark />
-          </div>
+  //         <div className="mt-6">
+  //           <AmazonRatingBadge dark />
+  //         </div>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href={mainDudleyUrl} target="_blank" rel="noreferrer" className="primary-pill">
-              PCA Moisture Retainer 16 oz
-            </a>
-            <button type="button" onClick={() => setIsOpen(false)} className="secondary-pill-dark">
-              Keep browsing
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+  //         <div className="mt-8 flex flex-wrap gap-3">
+  //           <a href={mainDudleyUrl} target="_blank" rel="noreferrer" className="primary-pill">
+  //             PCA Moisture Retainer 16 oz
+  //           </a>
+  //           <button type="button" onClick={() => setIsOpen(false)} className="secondary-pill-dark">
+  //             Keep browsing
+  //           </button>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </div>
+  // )
 }
