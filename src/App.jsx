@@ -18,11 +18,6 @@ export default function App() {
         <Routes>
           <Route path="/" element={<LandingIndex />} />
           <Route path="/pca-moisture-retainer" element={<PCAMoistureRetainer />} />
-          <Route path="/peppermint-combo" element={<PeppermintCombo />} />
-          <Route path="/vitamin-power-leave-in" element={<VitaminPowerLeaveIn />} />
-          <Route path="/scalp-and-skin" element={<ScalpandSkin />} />
-          <Route path="/protein-boost-seal" element={<ProteinBoostSeal />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Footer />
         <CouponPopup />

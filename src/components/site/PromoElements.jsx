@@ -2,7 +2,7 @@ import { Gift, ShoppingBag, Star, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { amazonRating, couponOffer } from '../../data/products'
 
-const mainDudleyUrl = 'https://shop.dudleyq.com'
+const mainDudleyUrl = 'https://shop.dudleyq.com/products/pca-moisture-retainer-16-oz'
 
 export function AmazonRatingBadge({ dark = false, className = '' }) {
   return (
@@ -119,7 +119,7 @@ export function CouponPopup() {
 
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={mainDudleyUrl} target="_blank" rel="noreferrer" className="primary-pill">
-              Go to Dudley shop
+              PCA Moisture Retainer 16 oz
             </a>
             <button type="button" onClick={() => setIsOpen(false)} className="secondary-pill-dark">
               Keep browsing

@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 import { products } from '../../data/products'
 
-const shopUrl = 'https://shop.dudleyq.com'
+const shopUrl = 'https://shop.dudleyq.com/products/pca-moisture-retainer-16-oz?_pos=1&_sid=bee2b8305&_ss=r'
 
 const primaryLinks = [
   { label: 'Home', href: '/' },
@@ -72,7 +72,7 @@ export function Footer() {
           'linear-gradient(180deg, var(--theme-footer-start) 0%, var(--theme-footer-mid) 44%, var(--theme-footer-end) 100%)',
       }}
     >
-      <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-10 lg:py-24">
+      {/* <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-10 lg:py-24">
         <div className="grid gap-16 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-[#f2c8cb]">
@@ -110,7 +110,7 @@ export function Footer() {
 
           <p className="text-sm text-white/55">© 2026 Dudley Beauty</p>
         </div>
-      </div>
+      </div> */}
     </footer>
   )
 }
